@@ -1,2 +1,9 @@
 #!/bin/bash
-awk 'NR > 1 {count[$1]++} END {for (ip in count) print count[ip], ip}' | sort -nr | head -11 | awk '{print $2}'
+
+# Read input from standard input
+# Skip the first line (header) using tail -n +2
+# Extract the first column (host)
+# Sort and count occurrences
+# Sort by number of requests in descending order
+# Extract the top 11 hosts or IPs
+awk 'NR > 1 {print $1}' | sort | uniq -c | sort -nr | head -11 | awk '{print $2}'
